@@ -1,0 +1,31 @@
+package com.citibank.customerapi.config;
+
+import com.citibank.customerapi.model.Customer;
+import com.citibank.customerapi.repository.CustomerRepository;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
+
+/*
+ * Seeds demo customers into MongoDB on startup, but only if the
+ * collection is empty - so restarts don't keep duplicating data.
+ */
+@Component
+public class DataSeeder implements CommandLineRunner {
+
+    private final CustomerRepository customerRepository;
+
+    public DataSeeder(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
+    }
+
+    @Override
+    public void run(String... args) {
+        if (customerRepository.count() > 0) {
+            return;
+        }
+
+        customerRepository.save(new Customer("C001", "pass123", "Sonia Jain", "sonia@example.com", "555-0101", "New York", 10001));
+        customerRepository.save(new Customer("C002", "pass123", "Nevil Johnson", "nevil@example.com", "555-0102", "Chicago", 60601));
+        customerRepository.save(new Customer("C003", "pass123", "Carla Gomez", "carla@example.com", "555-0103", "Los Angeles", 90001));
+    }
+}
