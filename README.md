@@ -5,6 +5,9 @@ A Spring Boot REST API for looking up bank customers, backed by MongoDB.
 **Endpoints:**
 - `GET /api/customers` — list all customers
 - `GET /api/customers/{customerId}` — get one customer
+- `POST /api/customers` — create a customer (409 if the id is already taken)
+- `DELETE /api/customers/{customerId}` — delete a customer (404 if it doesn't exist)
+
 
 **Run it:**
 
