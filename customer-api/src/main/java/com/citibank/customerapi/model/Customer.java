@@ -24,7 +24,8 @@ public class Customer {
 
     private List<Accounts> accounts = new ArrayList<>();
 
-    @PersistenceCreator
+
+    @PersistenceCreator // helps Spring Data create object from MongoDB
     public Customer(String customerId, String password, String name, String email, String phoneNumber, String branchLocation, int postalCode) {
         this.customerId = customerId;
         this.password = password;
